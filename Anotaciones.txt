@@ -1,0 +1,6 @@
+Anotaciones
+
+rock, metal pop, rap 
+75013 9224 12967 11001
+
+CREATE TABLE songs (track_id text PRIMARY KEY, title text, song_id text, release text, artist_id text, artist_mbid text, artist_name text, duration real, artist_familiarity real, artist_hotttnesss real, year int)',)]
