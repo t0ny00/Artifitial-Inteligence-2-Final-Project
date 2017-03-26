@@ -13,7 +13,7 @@ msd_subset_addf_path = os.path.join(msd_subset_path, 'AdditionalFiles')
 assert os.path.isdir(msd_subset_path), 'wrong path'  # sanity check
 # path to the Million Song Dataset code
 # CHANGE IT TO YOUR LOCAL CONFIGURATION
-msd_code_path = './MSongsDB-master'
+msd_code_path = './MSongsDB'
 assert os.path.isdir(msd_code_path), 'wrong path'  # sanity check
 # we add some paths to python so we can import MSD code
 # Ubuntu: you can change the environment variable PYTHONPATH
