@@ -66,6 +66,7 @@ def extractGenre():
 
 def move_files():
     lista = open("lista_final.cls", 'r')
+    if not (os.path.exists("./canciones/")) : os.makedirs('./canciones')
     for line in lista:
         sep = re.split('\t|\n', line)
         file_name = sep[0] + ".h5"

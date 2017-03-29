@@ -9,6 +9,7 @@ sys.path.insert(0, './MSongsDB/PythonSrc')
 import hdf5_getters as getters
 
 
+
 def extractSongData(file_name, getters_to_apply):
     path = './canciones/' + file_name + '.h5'
     h5 = getters.open_h5_file_read(path)
@@ -53,25 +54,27 @@ if __name__ == '__main__':
     for (dirpath, dirnames, filenames) in walk('canciones'):
         f.extend(filenames)
         break
-    temp = []
+
     for elem in f:
         file_name = elem[:-3]                              # nombre del archivo de la cancion sin la extension
         genre = all_songfiles_dict[file_name]              # Genero de la cancion
         song = extractSongData(file_name,getters_to_apply) # retorna los datos de la cancion
-        songs.append(song)
-        genres.append(genre)
-        temp.append(file_name)
+        if not (np.isnan(np.sum(song))):
+            songs.append(song)
+            genres.append(genre)
+
 
 
     # for i in range(len(songs)):
     #     print("\nCancion: " + str(i+1) + ' ' + str(songs[i]) + "\nGenero: " + str(genres[i]) + '\n')
+
 
     scaler = StandardScaler()
     X_train, X_test, y_train, y_test = train_test_split(songs, genres, test_size = 0.33)
     scaler.fit(X_train)
     X_train = scaler.transform(X_train)
     X_test = scaler.transform(X_test)
-    clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(1000, 1000,1000,100))
+    clf = MLPClassifier(solver='adam', alpha=1e-2, hidden_layer_sizes=(100, 100,100),max_iter=5000,verbose=True)
     clf.fit(X_train , y_train)
 
     print accuracy_score( clf.predict(X_test),y_test)
